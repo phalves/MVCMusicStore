@@ -1,0 +1,15 @@
+_Resharper*
+
+# Arquivos do Visual Studio
+*.suo
+*.csproj.user
+*/bin/*
+*/obj/*
+Backup/*
+
+*.less.debug.css
+
+
+*.user
+
+core_*.css
