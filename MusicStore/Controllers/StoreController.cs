@@ -12,9 +12,14 @@ namespace MusicStore.Controllers
         //
         // GET: /Store/
 
-        public string Index()
+        MusicStoreEntities storeDB = new MusicStoreEntities();
+
+        public ActionResult Index()
         {
-            return "Hello from Store.Index()";
+            //TEM ALGUMA COISA ERRADA AQUI
+            var genres = storeDB.Genres.ToList();
+            
+            return View(genres);
         }
 
         //
@@ -22,7 +27,7 @@ namespace MusicStore.Controllers
 
         public ActionResult Details(int id)
         {
-            var album = new Album { Title = "Album" + id };
+            var album = new Album { Title = "Album " + id };
 
             return View(album);
         }
@@ -30,10 +35,11 @@ namespace MusicStore.Controllers
         //
         // GET: /Store/Browse?genre=Disco
 
-        public string Browse(string genre)
+        public ActionResult Browse(string genre)
         {
-            string message = HttpUtility.HtmlEncode("Store.Browse, Genre =" + genre);
-            return message;
+            var genreModel = new Genre { Name = genre };
+
+            return View(genreModel);
         }
     }
 }
