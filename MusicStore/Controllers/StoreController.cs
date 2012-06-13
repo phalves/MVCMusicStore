@@ -16,7 +16,6 @@ namespace MusicStore.Controllers
 
         public ActionResult Index()
         {
-            //TEM ALGUMA COISA ERRADA AQUI
             var genres = storeDB.Genres.ToList();
             
             return View(genres);
@@ -27,7 +26,7 @@ namespace MusicStore.Controllers
 
         public ActionResult Details(int id)
         {
-            var album = new Album { Title = "Album " + id };
+            var album = storeDB.Albums.Find(id);
 
             return View(album);
         }
@@ -37,7 +36,8 @@ namespace MusicStore.Controllers
 
         public ActionResult Browse(string genre)
         {
-            var genreModel = new Genre { Name = genre };
+            var genreModel = storeDB.Genres.Include("Albums")
+                .Single(g => g.Name == genre);
 
             return View(genreModel);
         }
